@@ -27,7 +27,7 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QWidget *widget;
+    QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QPushButton *BtSnap;
@@ -35,8 +35,6 @@ public:
     QComboBox *comBoxType;
     QSpacerItem *horizontalSpacer;
     QPushButton *BtSetting;
-    QPushButton *BtMini;
-    QPushButton *BtClose;
     QHBoxLayout *horizontalLayout_2;
     QFrame *framePicture;
     QFrame *frameShow;
@@ -49,25 +47,23 @@ public:
         MainWindow->resize(1000, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        widget = new QWidget(centralwidget);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(40, 30, 591, 421));
-        verticalLayout = new QVBoxLayout(widget);
+        verticalLayout_2 = new QVBoxLayout(centralwidget);
+        verticalLayout_2->setObjectName("verticalLayout_2");
+        verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName("verticalLayout");
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName("horizontalLayout");
-        BtSnap = new QPushButton(widget);
+        BtSnap = new QPushButton(centralwidget);
         BtSnap->setObjectName("BtSnap");
 
         horizontalLayout->addWidget(BtSnap);
 
-        BtReSnap = new QPushButton(widget);
+        BtReSnap = new QPushButton(centralwidget);
         BtReSnap->setObjectName("BtReSnap");
 
         horizontalLayout->addWidget(BtReSnap);
 
-        comBoxType = new QComboBox(widget);
+        comBoxType = new QComboBox(centralwidget);
         comBoxType->setObjectName("comBoxType");
 
         horizontalLayout->addWidget(comBoxType);
@@ -76,35 +72,27 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        BtSetting = new QPushButton(widget);
+        BtSetting = new QPushButton(centralwidget);
         BtSetting->setObjectName("BtSetting");
 
         horizontalLayout->addWidget(BtSetting);
-
-        BtMini = new QPushButton(widget);
-        BtMini->setObjectName("BtMini");
-
-        horizontalLayout->addWidget(BtMini);
-
-        BtClose = new QPushButton(widget);
-        BtClose->setObjectName("BtClose");
-
-        horizontalLayout->addWidget(BtClose);
 
 
         verticalLayout->addLayout(horizontalLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        framePicture = new QFrame(widget);
+        framePicture = new QFrame(centralwidget);
         framePicture->setObjectName("framePicture");
+        framePicture->setMinimumSize(QSize(0, 100));
         framePicture->setFrameShape(QFrame::Shape::StyledPanel);
         framePicture->setFrameShadow(QFrame::Shadow::Raised);
 
         horizontalLayout_2->addWidget(framePicture);
 
-        frameShow = new QFrame(widget);
+        frameShow = new QFrame(centralwidget);
         frameShow->setObjectName("frameShow");
+        frameShow->setMinimumSize(QSize(0, 100));
         frameShow->setFrameShape(QFrame::Shape::StyledPanel);
         frameShow->setFrameShadow(QFrame::Shadow::Raised);
 
@@ -112,6 +100,9 @@ public:
 
 
         verticalLayout->addLayout(horizontalLayout_2);
+
+
+        verticalLayout_2->addLayout(verticalLayout);
 
         MainWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(MainWindow);
@@ -129,8 +120,6 @@ public:
         BtSnap->setText(QCoreApplication::translate("MainWindow", "\346\210\252\345\233\276", nullptr));
         BtReSnap->setText(QCoreApplication::translate("MainWindow", "\351\207\215\346\226\260\346\210\252\345\233\276", nullptr));
         BtSetting->setText(QCoreApplication::translate("MainWindow", "\350\256\276\347\275\256", nullptr));
-        BtMini->setText(QCoreApplication::translate("MainWindow", "\346\234\200\345\260\217\345\214\226", nullptr));
-        BtClose->setText(QCoreApplication::translate("MainWindow", "\345\205\263\351\227\255", nullptr));
     } // retranslateUi
 
 };
