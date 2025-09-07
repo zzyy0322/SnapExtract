@@ -119,9 +119,10 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
-      <AdditionalIncludeDirectories>D:\Project\SnapExtract\SEQt;E:\Qt\6.9.1\msvc2022_64\include;E:\Qt\6.9.1\msvc2022_64\include\QtWidgets;E:\Qt\6.9.1\msvc2022_64\include\QtCore;E:\Qt\6.9.1\msvc2022_64\include\QtGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Project\SnapExtract\SEQtMoc;E:\Qt\6.9.1\msvc2022_64\include;E:\Qt\6.9.1\msvc2022_64\include\QtWidgets;E:\Qt\6.9.1\msvc2022_64\include\QtCore;E:\Qt\6.9.1\msvc2022_64\include\QtGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,19 +130,24 @@
       <AdditionalLibraryDirectories>E:\Qt\6.9.1\msvc2022_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>"$(ProjectDir)..\scripts\buildQtUi.bat"</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\SEQt\MyQtWindow.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="SEMainWindow.h" />
+    <ClInclude Include="SEScenntShotInter.h" />
+    <ClInclude Include="SEWindowScenntShot.h" />
+    <ClInclude Include="SnapExtractDef.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\SEQt\moc_MyQtWindow.cpp" />
-    <ClCompile Include="MyQtWindow.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SEMainWindow.cpp" />
+    <ClCompile Include="SEScenntShotInter.cpp" />
+    <ClCompile Include="SEWindowScenntShot.cpp" />
     <ClCompile Include="SnapExtract.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

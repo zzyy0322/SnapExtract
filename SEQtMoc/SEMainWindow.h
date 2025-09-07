@@ -1,22 +1,36 @@
-#ifndef MYQTWINDOW_H
-#define MYQTWINDOW_H
+#pragma once
 
 #include <QtWidgets/QMainWindow>
+#include "SEScenntShotInter.h"
 
-class MyQtWindow : public QMainWindow {
-    Q_OBJECT  // 必须添加，需要 moc 处理
+class SEMainWindow : public QMainWindow
+{
+	Q_OBJECT
 public:
-    MyQtWindow(QWidget* parent = nullptr);
+	SEMainWindow(QWidget* parent = nullptr);
+
+public:
+    void setScenntShotInterface(SEScenntShotInter* _pInter);
+
+public:
+    void updateStatusBar();
 
 private:
     void __initUI();
     void __initSingalSlots();
 
 private slots:
+    /*截图按钮*/
     void do_pushbtCapture();
 
-private:
+signals:
+    // 请求开始截图
+    void screenshotRequested();
 
+private:
+    SEScenntShotInter* m_pScenntShot;
+
+private:
     // 声明控件
     QWidget* centralWidget;       // 主窗口中心部件（必选，QMainWindow 要求）
     // 顶部工具栏控件
@@ -50,4 +64,4 @@ private:
     QLabel* lblTip;               // 左侧操作提示
     QLabel* lblStats;             // 右侧状态统计（耗时+历史记录）
 };
-#endif
+

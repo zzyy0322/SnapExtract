@@ -1,6 +1,7 @@
 #include "pch.h"
 #include <QApplication>
-#include "MyQtWindow.h"
+#include "SEMainWindow.h"
+#include "SEWindowScenntShot.h"
 
 // 原有业务逻辑
 void originalLogic() {
@@ -14,8 +15,11 @@ int main(int argc, char* argv[]) {
     // 2. 执行原有业务逻辑
     originalLogic();
 
+    SEWindowScenntShot pWindowShot;
+
     // 3. 显示 Qt 窗口
-    MyQtWindow window;
+    SEMainWindow window;
+    window.setScenntShotInterface(&pWindowShot);
     window.show();
 
     // 4. 启动 Qt 事件循环（程序会阻塞在此，直到窗口关闭）

@@ -13,10 +13,28 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{fe29eced-fcf3-425d-9942-e866a9ccd618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\截图">
+      <UniqueIdentifier>{caa93617-7d4b-45bf-9f21-9bde982a9843}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SEMainWindow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SnapExtractDef.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SEScenntShotInter.h">
+      <Filter>Interface\截图</Filter>
+    </ClInclude>
+    <ClInclude Include="SEWindowScenntShot.h">
+      <Filter>Interface\截图</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -26,8 +44,14 @@
     <ClCompile Include="SnapExtract.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="..\SEQt\mainwindow.ui" />
+    <ClCompile Include="SEMainWindow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SEScenntShotInter.cpp">
+      <Filter>Interface\截图</Filter>
+    </ClCompile>
+    <ClCompile Include="SEWindowScenntShot.cpp">
+      <Filter>Interface\截图</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
