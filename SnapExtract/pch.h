@@ -16,6 +16,7 @@
 #include <QColor>
 #include <QScreen>
 #include <QGuiApplication>
+#include <QRect>
 
 /*SnapExtract*/
 #include "SnapExtractDef.h"

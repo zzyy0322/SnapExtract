@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SEScenntShotInter.h"
+#include "SEOverlayWidget.h"
 
 class SEWindowScenntShot : public SEScenntShotInter
 {
@@ -12,9 +13,16 @@ public:
 	// 通过 SEScenntShotInter 继承
 	void startScreenshot() override;
 
+private slots:
+    void onScreenshotSelected(const QRect& rect);
+
+signals:
+    // 开始自定义截图
+    void __startScreenshot();
+
 private:
     // 截图遮罩窗口
-    QWidget* m_overlayWidget;
+    SEOverlayWidget* m_overlayWidget;
     // 屏幕原始图像
     QPixmap m_screenPixmap;
     // 当前选中的区域

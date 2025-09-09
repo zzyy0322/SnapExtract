@@ -21,36 +21,54 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>源文件</Filter>
+    <ClInclude Include="..\SEQtMoc\SEMainWindow.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="SEMainWindow.h">
+    <ClInclude Include="pch.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SnapExtractDef.h">
-      <Filter>源文件</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="SEScenntShotInter.h">
+    <ClInclude Include="..\SEQtMoc\SEScenntShotInter.h">
       <Filter>Interface\截图</Filter>
     </ClInclude>
-    <ClInclude Include="SEWindowScenntShot.h">
+    <ClInclude Include="..\SEQtMoc\SEWindowScenntShot.h">
+      <Filter>Interface\截图</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SEQtMoc\SEOverlayWidget.h">
       <Filter>Interface\截图</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="SnapExtract.cpp">
-      <Filter>头文件</Filter>
+      <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="SEMainWindow.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SnapExtract.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SEQtMoc\moc_SEMainWindow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SEQtMoc\moc_SEScenntShotInter.cpp">
+      <Filter>Interface\截图</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SEQtMoc\moc_SEWindowScenntShot.cpp">
+      <Filter>Interface\截图</Filter>
     </ClCompile>
     <ClCompile Include="SEScenntShotInter.cpp">
       <Filter>Interface\截图</Filter>
     </ClCompile>
     <ClCompile Include="SEWindowScenntShot.cpp">
+      <Filter>Interface\截图</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SEQtMoc\moc_SEOverlayWidget.cpp">
+      <Filter>Interface\截图</Filter>
+    </ClCompile>
+    <ClCompile Include="SEOverlayWidget.cpp">
       <Filter>Interface\截图</Filter>
     </ClCompile>
   </ItemGroup>
