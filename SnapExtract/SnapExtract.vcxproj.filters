@@ -50,26 +50,26 @@
     <ClCompile Include="SnapExtract.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\SEQtMoc\moc_SEMainWindow.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SEQtMoc\moc_SEScenntShotInter.cpp">
-      <Filter>Interface\截图</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SEQtMoc\moc_SEWindowScenntShot.cpp">
-      <Filter>Interface\截图</Filter>
-    </ClCompile>
     <ClCompile Include="SEScenntShotInter.cpp">
       <Filter>Interface\截图</Filter>
     </ClCompile>
     <ClCompile Include="SEWindowScenntShot.cpp">
       <Filter>Interface\截图</Filter>
     </ClCompile>
-    <ClCompile Include="..\SEQtMoc\moc_SEOverlayWidget.cpp">
-      <Filter>Interface\截图</Filter>
-    </ClCompile>
     <ClCompile Include="SEOverlayWidget.cpp">
       <Filter>Interface\截图</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_SEMainWindow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_SEOverlayWidget.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_SEScenntShotInter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_SEWindowScenntShot.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,4 +1,3 @@
-#include "pch.h"
 /****************************************************************************
 ** Meta object code from reading C++ file 'SEScenntShotInter.h'
 **
@@ -7,7 +6,8 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "SEScenntShotInter.h"
+#include "pch.h"
+#include "../SEQtMoc/SEScenntShotInter.h"
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>

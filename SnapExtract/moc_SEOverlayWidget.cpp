@@ -1,4 +1,3 @@
-#include "pch.h"
 /****************************************************************************
 ** Meta object code from reading C++ file 'SEOverlayWidget.h'
 **
@@ -7,7 +6,8 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "SEOverlayWidget.h"
+#include "pch.h"
+#include "../SEQtMoc/SEOverlayWidget.h"
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>

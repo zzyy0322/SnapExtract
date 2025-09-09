@@ -5,8 +5,9 @@
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
+
 #include "pch.h"
-#include "SEMainWindow.h"
+#include "../SEQtMoc/SEMainWindow.h"
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>

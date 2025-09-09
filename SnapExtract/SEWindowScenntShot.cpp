@@ -24,3 +24,8 @@ void SEWindowScenntShot::startScreenshot()
 
     m_isCapturing = true;
 }
+
+void SEWindowScenntShot::onScreenshotSelected(const QRect& rect)
+{
+
+}
