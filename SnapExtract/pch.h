@@ -17,6 +17,12 @@
 #include <QScreen>
 #include <QGuiApplication>
 #include <QRect>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QGuiApplication>
+#include <QClipboard>
+#include <QDateTime>
+#include <QFileDialog>
 
 /*SnapExtract*/
 #include "SnapExtractDef.h"

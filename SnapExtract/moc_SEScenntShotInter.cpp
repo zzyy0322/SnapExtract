@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "pch.h"
+#include "pch.h" 
 #include "../SEQtMoc/SEScenntShotInter.h"
 #include <QtCore/qmetatype.h>
 

@@ -8,6 +8,7 @@ class SEWindowScenntShot : public SEScenntShotInter
 	Q_OBJECT
 public:
 	SEWindowScenntShot(QObject* parent = nullptr);
+    virtual ~SEWindowScenntShot();
 
 public:
 	// Í¨¹ý SEScenntShotInter ¼Ì³Ð
