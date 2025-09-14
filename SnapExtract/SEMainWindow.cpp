@@ -20,7 +20,29 @@ void SEMainWindow::setScenntShotInterface(SEScenntShotInter* _pInter)
 
 void SEMainWindow::updateStatusBar()
 {
-	lblTip->setText(QStringLiteral("请通过鼠标点击截图"));
+	if (!lblPreview->pixmap().isNull()
+		&& m_ScenntType == enActionType::enSnapEnd)
+	{
+		//leftEditToolWidget->setVisible(true);
+		btnCapture->setEnabled(false);
+		btnReCapture->setEnabled(true);
+	}
+}
+
+void SEMainWindow::endScreenshot(QPixmap _screenPixmap)
+{
+	qWarning() << "SEMainWindow::endScreenshot!";
+	m_ScenntType = enActionType::enSnapEnd;
+	this->show();
+	this->move(m_originalPos); // 移回原始位置
+
+	/*将截图显示到预览框里*/
+	if (!_screenPixmap.isNull()) {
+		m_ScenntPixMap = new QPixmap(_screenPixmap);
+	}
+	showScenntPixMap();
+
+	return;
 }
 
 void SEMainWindow::__initUI()
@@ -91,12 +113,14 @@ void SEMainWindow::__initUI()
 
 	// 左侧标题栏（文字“截图预览”，加粗，背景 #F5F5F5，高度 28px）
 	lblLeftTitle = new QLabel(frameLeft);
+	lblLeftTitle->setFrameStyle(QFrame::Box | QFrame::Sunken);
 	lblLeftTitle->setText(QStringLiteral("截图预览"));
 	lblLeftTitle->setFixedHeight(28);
 	lblLeftTitle->setAlignment(Qt::AlignCenter);
 
 	// 左侧预览容器（显示截图，默认提示文字，居中对齐）
 	lblPreview = new QLabel(frameLeft);
+	lblPreview->setFrameStyle(QFrame::Box | QFrame::Sunken);
 	lblPreview->setText(QStringLiteral("点击左侧｢截图｣按钮开始捕获"));
 	lblPreview->setAlignment(Qt::AlignCenter);
 	lblPreview->setStyleSheet("color: #999;"); // 灰色字体
@@ -238,17 +262,85 @@ void SEMainWindow::__initUI()
 void SEMainWindow::__initSingalSlots()
 {
 	connect(btnCapture, &QPushButton::clicked, this, &SEMainWindow::do_pushbtCapture);
+	connect(btnReCapture, &QPushButton::clicked, this, &SEMainWindow::do_pushbtReCapture);
 
 	if (m_pScenntShot)
 	{
 		// 开始截图
 		connect(this, &SEMainWindow::screenshotRequested,
 			m_pScenntShot, &SEScenntShotInter::startScreenshot);
+
+		connect(m_pScenntShot, &SEScenntShotInter::endScreenshot,
+			this, &SEMainWindow::endScreenshot);
+	}
+}
+
+void SEMainWindow::resizeEvent(QResizeEvent* event)
+{
+	QMainWindow::resizeEvent(event);
+	showScenntPixMap();
+}
+
+void SEMainWindow::hideEvent(QHideEvent* event)
+{
+	QMainWindow::hideEvent(event);
+
+	if (m_ScenntType != enActionType::enSnapStart) {
+		return;
 	}
 
+	emit screenshotRequested();
+}
+
+void SEMainWindow::do_pushbtReCapture()
+{
+	btnCapture->setEnabled(true);
+	btnReCapture->setEnabled(false);
+	leftEditToolWidget->setVisible(false);
+	lblPreview->clear();
+	lblPreview->setText(QStringLiteral("点击左侧｢截图｣按钮开始捕获"));
+
+	if (m_ScenntPixMap != nullptr)
+		delete m_ScenntPixMap;
+	m_ScenntPixMap = nullptr;
+}
+
+void SEMainWindow::showScenntPixMap()
+{
+	/*将截图显示到预览框里*/
+	if (m_ScenntPixMap != nullptr) {
+
+		// 设置图片到预览标签
+		lblPreview->setPixmap(*m_ScenntPixMap);
+
+		// 可选：设置图片缩放模式（根据需要选择）
+		// 1. 保持比例缩放以适应标签大小（推荐）
+		lblPreview->setScaledContents(false);
+		lblPreview->setAlignment(Qt::AlignCenter);
+		lblPreview->setPixmap(m_ScenntPixMap->scaled(
+			lblPreview->size(),
+			Qt::KeepAspectRatio,
+			Qt::SmoothTransformation
+		));
+
+		// 可选：更新状态栏提示
+		updateStatusBar();
+	}
 }
 
 void SEMainWindow::do_pushbtCapture()
 {
-	emit screenshotRequested();
+	m_ScenntType = enActionType::enSnapStart;
+
+	// 记录原始位置和可见状态（用于恢复）
+	m_originalPos = this->pos();
+	m_wasVisible = this->isVisible();
+
+	// 2. 将窗口移到屏幕外（超出主屏幕工作区）{解决隐藏后，截图仍然能捕捉到的问题}
+   // 获取主屏幕工作区（排除任务栏）
+	QRect screenRect = QGuiApplication::primaryScreen()->availableGeometry();
+	// 移到屏幕左侧外面（x坐标为负，确保完全看不到）
+	this->move(-this->width() - 100, screenRect.y());
+
+	this->hide();
 }

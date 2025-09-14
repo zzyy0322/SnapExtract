@@ -1,5 +1,4 @@
 #include "pch.h"
-#include <QApplication>
 #include "SEMainWindow.h"
 #include "SEWindowScenntShot.h"
 

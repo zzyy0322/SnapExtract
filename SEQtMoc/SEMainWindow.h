@@ -14,21 +14,33 @@ public:
 
 public:
     void updateStatusBar();
+    void endScreenshot(QPixmap _screenPixmap);
 
 private:
     void __initUI();
     void __initSingalSlots();
 
+protected:
+    void resizeEvent(QResizeEvent* event) override;
+    void hideEvent(QHideEvent* event) override;
+
 private slots:
     /*截图按钮*/
     void do_pushbtCapture();
+    /*重新截图*/
+    void do_pushbtReCapture();
 
 signals:
     // 请求开始截图
     void screenshotRequested();
 
 private:
+    void showScenntPixMap();
+
+private:
     SEScenntShotInter* m_pScenntShot;
+    enActionType m_ScenntType = enActionType::enNone;
+    QPixmap* m_ScenntPixMap = nullptr;
 
 private:
     // 声明控件
@@ -63,5 +75,9 @@ private:
     QWidget* bottomStatusWidget;  // 底部状态栏容器
     QLabel* lblTip;               // 左侧操作提示
     QLabel* lblStats;             // 右侧状态统计（耗时+历史记录）
+
+private:
+    QPoint m_originalPos; // 记录窗口原始位置
+    bool m_wasVisible;    // 记录窗口原始可见状态
 };
 

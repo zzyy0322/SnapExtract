@@ -2,5 +2,8 @@
 
 enum class enActionType
 {
+	enNone,
 	enSnapStart,
+	enSnaping,
+	enSnapEnd,
 };

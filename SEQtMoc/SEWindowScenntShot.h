@@ -26,9 +26,7 @@ private:
     SEOverlayWidget* m_overlayWidget;
     // 屏幕原始图像
     QPixmap m_screenPixmap;
-    // 当前选中的区域
-    QRect m_selectedArea;
-    // 是否正在截图
-    bool m_isCapturing;
+    // 截图结果
+    QPixmap m_resultPixmap;
 };
 

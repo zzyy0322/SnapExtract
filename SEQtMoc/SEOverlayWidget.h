@@ -20,6 +20,6 @@ private:
     QRect m_selectionRect;//选择的区域
     QPoint m_startPos;//鼠标按下起点
     QPoint m_endPos;
-    bool m_selecting = false;//是否正在选择
+    enActionType m_enType = enActionType::enNone;
 };
 

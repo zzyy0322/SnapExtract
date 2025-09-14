@@ -9,6 +9,7 @@ SEOverlayWidget::SEOverlayWidget(const QPixmap& bg, QWidget* parent):
 	setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 	setAttribute(Qt::WA_TranslucentBackground);
 	m_selectionRect = QRect();
+	m_enType = enActionType::enSnapStart;
 }
 
 void SEOverlayWidget::mousePressEvent(QMouseEvent* event)
@@ -19,7 +20,17 @@ void SEOverlayWidget::mousePressEvent(QMouseEvent* event)
 		// 初始化选择区域（左上角和右下角均为起始点）
 		m_selectionRect.setTopLeft(m_startPos);
 		m_selectionRect.setBottomRight(m_startPos);
-		m_selecting = true; // 标记开始选择
+		m_enType = enActionType::enSnaping;
+	}
+
+	if (event->button() == Qt::RightButton && m_enType == enActionType::enSnapEnd)
+	{
+		emit selectionFinished(m_selectionRect);
+	}
+
+	if (event->button() == Qt::RightButton)
+	{
+		SEOverlayWidget::close();
 	}
 
 	QWidget::mousePressEvent(event);
@@ -27,7 +38,7 @@ void SEOverlayWidget::mousePressEvent(QMouseEvent* event)
 
 void SEOverlayWidget::mouseMoveEvent(QMouseEvent* event)
 {
-	if (m_selecting)
+	if (m_enType == enActionType::enSnaping)
 	{
 		m_endPos = event->pos();
 		m_selectionRect.setBottomRight(m_endPos);
@@ -39,16 +50,9 @@ void SEOverlayWidget::mouseMoveEvent(QMouseEvent* event)
 
 void SEOverlayWidget::mouseReleaseEvent(QMouseEvent* event)
 {
-	if (event->button() == Qt::LeftButton && m_selecting) // 左键释放且正在选择
+	if (event->button() == Qt::LeftButton && m_enType == enActionType::enSnaping) // 左键释放且正在选择
 	{
-		m_selecting = false; // 结束选择
-		// 标准化矩形（确保左上角坐标小于右下角，避免负数或反转）
-		m_selectionRect = m_selectionRect.normalized();
-	}
-
-	if (event->button() == Qt::RightButton && !m_selecting)
-	{
-		emit selectionFinished(m_selectionRect);
+		m_enType = enActionType::enSnapEnd;
 	}
 
 	QWidget::mouseReleaseEvent(event);
@@ -65,8 +69,17 @@ void SEOverlayWidget::paintEvent(QPaintEvent* event)
 	// 2. 在选择区域绘制原始截图（形成“镂空”效果，显示原始画面）
 	if (!m_selectionRect.isEmpty()) // 只有选择区域有效时才绘制
 	{
+		/*获取当前系统的分辨率*/
+		qreal dpr = QGuiApplication::primaryScreen()->devicePixelRatio();
+		QRect sourceRect(
+			m_selectionRect.x() * dpr,       // x坐标转换
+			m_selectionRect.y() * dpr,       // y坐标转换
+			m_selectionRect.width() * dpr,   // 宽度转换
+			m_selectionRect.height() * dpr   // 高度转换
+		);
+
 		// 从全屏截图（m_background）中截取选择区域，绘制到覆盖层上
-		painter.drawPixmap(m_selectionRect, m_background, m_selectionRect);
+		painter.drawPixmap(m_selectionRect, m_background, sourceRect);
 	}
 
 	// 3. 绘制选择区域的红色边框（便于用户识别）
