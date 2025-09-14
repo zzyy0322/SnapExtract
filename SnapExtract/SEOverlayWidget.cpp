@@ -31,6 +31,7 @@ void SEOverlayWidget::mousePressEvent(QMouseEvent* event)
 	if (event->button() == Qt::RightButton)
 	{
 		SEOverlayWidget::close();
+		emit selectionFinished(m_selectionRect);
 	}
 
 	QWidget::mousePressEvent(event);

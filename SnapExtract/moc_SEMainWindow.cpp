@@ -43,7 +43,11 @@ template <> constexpr inline auto SEMainWindow::qt_create_metaobjectdata<qt_meta
         "screenshotRequested",
         "",
         "do_pushbtCapture",
-        "do_pushbtReCapture"
+        "do_pushbtReCapture",
+        "do_pushbtLoadPicture",
+        "onSplitterMoved",
+        "pos",
+        "index"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -53,6 +57,12 @@ template <> constexpr inline auto SEMainWindow::qt_create_metaobjectdata<qt_meta
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'do_pushbtReCapture'
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'do_pushbtLoadPicture'
+        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onSplitterMoved'
+        QtMocHelpers::SlotData<void(int, int)>(6, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 7 }, { QMetaType::Int, 8 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -79,6 +89,8 @@ void SEMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 0: _t->screenshotRequested(); break;
         case 1: _t->do_pushbtCapture(); break;
         case 2: _t->do_pushbtReCapture(); break;
+        case 3: _t->do_pushbtLoadPicture(); break;
+        case 4: _t->onSplitterMoved((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
         default: ;
         }
     }
@@ -107,14 +119,14 @@ int SEMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 5;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 5;
     }
     return _id;
 }

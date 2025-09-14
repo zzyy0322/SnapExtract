@@ -29,6 +29,10 @@ private slots:
     void do_pushbtCapture();
     /*重新截图*/
     void do_pushbtReCapture();
+    /*加载图片*/
+    void do_pushbtLoadPicture();
+
+    void onSplitterMoved(int pos, int index);
 
 signals:
     // 请求开始截图
@@ -48,8 +52,11 @@ private:
     // 顶部工具栏控件
     QPushButton* btnCapture;      // 截图按钮
     QPushButton* btnReCapture;    // 重新截图按钮
+    QPushButton* btnLoadPicture;  // 导入图片
     QComboBox* cbxRecogMode;      // 识别模式选择框
-    QPushButton* btnSettings;     // 设置按钮
+    QPushButton* btnScanPicture;  // 扫描图片
+
+    QSplitter* splitterMain;
 
     // 左侧截图区控件
     QFrame* frameLeft;            // 左侧容器（QFrame）
@@ -64,7 +71,6 @@ private:
     QFrame* frameRight;           // 右侧容器（QFrame）
     QWidget* rightTitleWidget;    // 右侧标题栏容器
     QLabel* lblRightTitle;        // 右侧标题（识别结果）
-    QLabel* lblStatus;            // 右侧状态提示（待识别/识别中/识别完成）
     QTextEdit* textEditResult;    // 识别结果编辑区
     QWidget* rightExportToolWidget;// 右侧导出工具栏容器
     QPushButton* btnExportTXT;    // 导出 TXT 按钮

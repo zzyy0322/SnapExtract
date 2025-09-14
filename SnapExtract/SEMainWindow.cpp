@@ -24,6 +24,7 @@ void SEMainWindow::updateStatusBar()
 		&& m_ScenntType == enActionType::enSnapEnd)
 	{
 		//leftEditToolWidget->setVisible(true);
+		rightExportToolWidget->setVisible(true);
 		btnCapture->setEnabled(false);
 		btnReCapture->setEnabled(true);
 	}
@@ -76,6 +77,10 @@ void SEMainWindow::__initUI()
 	btnReCapture->setText(QString(QStringLiteral("重新截图")));
 	btnReCapture->setEnabled(false); // 默认禁用
 
+	// 导入图片
+	btnLoadPicture = new QPushButton(topToolWidget);
+	btnLoadPicture->setText(QString(QStringLiteral("导入图片")));
+
 	// 中间：识别模式选择框（选项：通用文字、代码优先，默认通用文字）
 	cbxRecogMode = new QComboBox(topToolWidget);
 	cbxRecogMode->addItem(QStringLiteral("通用文字"));
@@ -83,22 +88,24 @@ void SEMainWindow::__initUI()
 	cbxRecogMode->setCurrentIndex(0); // 默认选中第一个
 
 	// 右侧：设置按钮（图标为偏好设置）
-	btnSettings = new QPushButton(topToolWidget);
+	btnScanPicture = new QPushButton(topToolWidget);
+	btnScanPicture->setText(QString(QStringLiteral("开始识别")));
 
 	// 将顶部控件添加到布局（通过 addStretch() 实现“左-中-右”对齐）
 	topToolLayout->addWidget(btnCapture);
 	topToolLayout->addWidget(btnReCapture);
+	topToolLayout->addWidget(btnLoadPicture);
 	topToolLayout->addStretch(1); // 左侧控件与中间控件之间拉伸
 	topToolLayout->addWidget(cbxRecogMode);
 	//topToolLayout->addStretch(1); // 中间控件与右侧控件之间拉伸
-	topToolLayout->addWidget(btnSettings);
+	topToolLayout->addWidget(btnScanPicture);
 	topToolLayout->addSpacing(10);
 
 	// 将顶部工具栏添加到顶层布局
 	topLayout->addWidget(topToolWidget);
 
 	// -------------------------- 步骤2：初始化左右分栏（QSplitter） --------------------------
-	QSplitter* splitterMain = new QSplitter(centralWidget);
+	splitterMain = new QSplitter(centralWidget);
 	splitterMain->setOrientation(Qt::Horizontal); // 水平分栏
 	splitterMain->setSizes(QList<int>() << 500 << 500); // 默认宽比 1:1
 	splitterMain->setHandleWidth(6); // 分隔线宽度 6px
@@ -177,13 +184,8 @@ void SEMainWindow::__initUI()
 	// 右侧标题（文字“识别结果”，加粗）
 	lblRightTitle = new QLabel(rightTitleWidget);
 	lblRightTitle->setText(QStringLiteral("识别结果"));
-	// 右侧状态提示（默认“待识别”，右对齐）
-	lblStatus = new QLabel(rightTitleWidget);
-	lblStatus->setText(QStringLiteral("待识别"));
-	lblStatus->setAlignment(Qt::AlignRight);
 	rightTitleLayout->addWidget(lblRightTitle);
 	rightTitleLayout->addStretch(1); // 标题与状态之间拉伸（右对齐状态）
-	rightTitleLayout->addWidget(lblStatus);
 
 	// 右侧内容编辑区（QTextEdit，默认禁用，识别后启用，代码字体 Consolas）
 	textEditResult = new QTextEdit(frameRight);
@@ -242,7 +244,7 @@ void SEMainWindow::__initUI()
 
 	// 左侧提示（文本“截图后自动开始识别”）
 	lblTip = new QLabel(bottomStatusWidget);
-	lblTip->setText(QStringLiteral("截图后自动开始识别"));
+	lblTip->setText(QStringLiteral("截图后点击：开始识别"));
 	lblTip->setStyleSheet("color: #666;");
 	// 右侧状态统计（文本“识别耗时：-- | 历史：0 条”）
 	lblStats = new QLabel(bottomStatusWidget);
@@ -263,6 +265,8 @@ void SEMainWindow::__initSingalSlots()
 {
 	connect(btnCapture, &QPushButton::clicked, this, &SEMainWindow::do_pushbtCapture);
 	connect(btnReCapture, &QPushButton::clicked, this, &SEMainWindow::do_pushbtReCapture);
+	connect(btnLoadPicture, &QPushButton::clicked, this, &SEMainWindow::do_pushbtLoadPicture);
+	connect(splitterMain, &QSplitter::splitterMoved, this, &SEMainWindow::onSplitterMoved);
 
 	if (m_pScenntShot)
 	{
@@ -303,6 +307,42 @@ void SEMainWindow::do_pushbtReCapture()
 	if (m_ScenntPixMap != nullptr)
 		delete m_ScenntPixMap;
 	m_ScenntPixMap = nullptr;
+}
+
+void SEMainWindow::do_pushbtLoadPicture()
+{
+	if (m_ScenntPixMap != nullptr)
+		delete m_ScenntPixMap;
+	m_ScenntPixMap = nullptr;
+	lblPreview->clear();
+
+	// 打开文件对话框，选择图片文件
+	QString filePath = QFileDialog::getOpenFileName(
+		this,                  // 父窗口
+		QStringLiteral("选择图片"),            // 对话框标题
+		QDir::homePath(),      // 初始目录（用户主目录）
+		QStringLiteral("图片文件 (*.png *.jpg *.jpeg *.bmp *.gif);;所有文件 (*)") // 文件过滤
+	);
+
+	// 如果用户选择了文件（未取消）
+	if (!filePath.isEmpty())
+	{
+		// 加载图片到原始像素图对象
+		QPixmap m_originalPixmap;
+		if (m_originalPixmap.load(filePath)) {
+			m_ScenntPixMap = new QPixmap(m_originalPixmap);
+			showScenntPixMap();
+		}
+	}
+}
+
+void SEMainWindow::onSplitterMoved(int pos, int index)
+{
+	Q_UNUSED(pos);
+	Q_UNUSED(index);
+
+	// 调整图片大小
+	showScenntPixMap();
 }
 
 void SEMainWindow::showScenntPixMap()
