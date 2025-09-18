@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "SEMainWindow.h"
+#include "SEScanPictureTool.h"
 
 SEMainWindow::SEMainWindow(QWidget* parent)
 	:QMainWindow(parent)
@@ -39,6 +40,10 @@ void SEMainWindow::endScreenshot(QPixmap _screenPixmap)
 
 	/*将截图显示到预览框里*/
 	if (!_screenPixmap.isNull()) {
+		m_picture = _screenPixmap.toImage();
+
+		bool saved = m_picture.save("D:/original_screenshot.png");
+
 		m_ScenntPixMap = new QPixmap(_screenPixmap);
 	}
 	showScenntPixMap();
@@ -266,6 +271,7 @@ void SEMainWindow::__initSingalSlots()
 	connect(btnCapture, &QPushButton::clicked, this, &SEMainWindow::do_pushbtCapture);
 	connect(btnReCapture, &QPushButton::clicked, this, &SEMainWindow::do_pushbtReCapture);
 	connect(btnLoadPicture, &QPushButton::clicked, this, &SEMainWindow::do_pushbtLoadPicture);
+	connect(btnScanPicture, &QPushButton::clicked, this, &SEMainWindow::do_pushbtScanPicture);
 	connect(splitterMain, &QSplitter::splitterMoved, this, &SEMainWindow::onSplitterMoved);
 
 	if (m_pScenntShot)
@@ -333,6 +339,17 @@ void SEMainWindow::do_pushbtLoadPicture()
 			m_ScenntPixMap = new QPixmap(m_originalPixmap);
 			showScenntPixMap();
 		}
+	}
+}
+
+void SEMainWindow::do_pushbtScanPicture()
+{
+	if (m_ScenntPixMap != nullptr)
+	{
+		SEScanPictureTool _tool;
+		auto result = _tool.ocrRecognize(m_picture);
+		QString s1 = "测试";
+		textEditResult->setWindowIconText(s1);
 	}
 }
 

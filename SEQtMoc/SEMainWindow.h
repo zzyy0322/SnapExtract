@@ -31,6 +31,8 @@ private slots:
     void do_pushbtReCapture();
     /*加载图片*/
     void do_pushbtLoadPicture();
+    /*识别图片*/
+    void do_pushbtScanPicture();
 
     void onSplitterMoved(int pos, int index);
 
@@ -45,6 +47,7 @@ private:
     SEScenntShotInter* m_pScenntShot;
     enActionType m_ScenntType = enActionType::enNone;
     QPixmap* m_ScenntPixMap = nullptr;
+    QImage m_picture;
 
 private:
     // 声明控件

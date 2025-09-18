@@ -19,6 +19,9 @@
     <Filter Include="Interface\截图">
       <UniqueIdentifier>{caa93617-7d4b-45bf-9f21-9bde982a9843}</UniqueIdentifier>
     </Filter>
+    <Filter Include="图像识别">
+      <UniqueIdentifier>{21cb4c06-4e5d-4635-8999-3bb758ef0714}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SEQtMoc\SEMainWindow.h">
@@ -38,6 +41,9 @@
     </ClInclude>
     <ClInclude Include="..\SEQtMoc\SEOverlayWidget.h">
       <Filter>Interface\截图</Filter>
+    </ClInclude>
+    <ClInclude Include="SEScanPictureTool.h">
+      <Filter>图像识别</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="moc_SEWindowScenntShot.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SEScanPictureTool.cpp">
+      <Filter>图像识别</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

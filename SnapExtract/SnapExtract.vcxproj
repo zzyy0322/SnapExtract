@@ -24,6 +24,7 @@
     <ClInclude Include="..\SEQtMoc\SEScenntShotInter.h" />
     <ClInclude Include="..\SEQtMoc\SEWindowScenntShot.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="SEScanPictureTool.h" />
     <ClInclude Include="SnapExtractDef.h" />
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +37,7 @@
     </ClCompile>
     <ClCompile Include="SEMainWindow.cpp" />
     <ClCompile Include="SEOverlayWidget.cpp" />
+    <ClCompile Include="SEScanPictureTool.cpp" />
     <ClCompile Include="SEScenntShotInter.cpp" />
     <ClCompile Include="SEWindowScenntShot.cpp" />
     <ClCompile Include="SnapExtract.cpp" />
@@ -144,15 +146,16 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
-      <AdditionalIncludeDirectories>D:\Project\SnapExtract\SEQtMoc;E:\Qt\6.9.1\msvc2022_64\include;E:\Qt\6.9.1\msvc2022_64\include\QtWidgets;E:\Qt\6.9.1\msvc2022_64\include\QtCore;E:\Qt\6.9.1\msvc2022_64\include\QtGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;D:\Project\SnapExtract\SEQtMoc;E:\Qt\6.9.1\msvc2022_64\include;E:\Qt\6.9.1\msvc2022_64\include\QtWidgets;E:\Qt\6.9.1\msvc2022_64\include\QtCore;E:\Qt\6.9.1\msvc2022_64\include\QtGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\Qt\6.9.1\msvc2022_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib;E:\Qt\6.9.1\msvc2022_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>powershell -ExecutionPolicy Bypass -File "$(ProjectDir)..\scripts\MocBuild.ps1" -sourceFilePath "$(ProjectDir)..\SEQtMoc" -outputFilePath "$(ProjectDir)..\SEQtMoc"</Command>
