@@ -348,8 +348,7 @@ void SEMainWindow::do_pushbtScanPicture()
 	{
 		SEScanPictureTool _tool;
 		auto result = _tool.ocrRecognize(m_picture);
-		QString s1 = "测试";
-		textEditResult->setWindowIconText(s1);
+		textEditResult->setText(result);
 	}
 }
 

@@ -45,6 +45,9 @@
     <ClInclude Include="SEScanPictureTool.h">
       <Filter>图像识别</Filter>
     </ClInclude>
+    <ClInclude Include="SELogInput.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -79,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="SEScanPictureTool.cpp">
       <Filter>图像识别</Filter>
+    </ClCompile>
+    <ClCompile Include="SELogInput.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
